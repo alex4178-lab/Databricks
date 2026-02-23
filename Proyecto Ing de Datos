@@ -1,0 +1,27 @@
+# Proyecto ETL Arquitectura Medallion — Databricks
+
+## Arquitectura
+Se implementó arquitectura Medallion:
+
+- Bronze: ingestión datos raw desde ADLS
+- Silver: limpieza y joins
+- Gold: agregaciones y métricas
+
+## Dataset
+Supermarket Superstore Dataset
+
+Fuentes utilizadas:
+- orders.csv
+- order_products_prior.csv
+- products.csv
+
+## Tecnologías
+- Azure Databricks
+- PySpark
+- Azure Data Lake Storage
+- Delta Lake
+- Databricks Lakeview
+
+## Pipeline
+
+Raw → Bronze → Silver → Gold → Dashboard
