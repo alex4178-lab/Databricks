@@ -1,0 +1,41 @@
+resources:
+  jobs:
+    WF_Proyecto:
+      name: WF-Proyecto
+      tasks:
+        - task_key: Ingest
+          notebook_task:
+            notebook_path: /Workspace/Users/alexchl4178@gmail.com/Proyecto Final/1. Bronze
+            base_parameters:
+              catalogo: catalog_alexander
+              esquema: bronze
+              container: raw
+              datalake: adlsalexander26
+            source: WORKSPACE
+          existing_cluster_id: 0215-230749-323msveo
+        - task_key: Transform
+          depends_on:
+            - task_key: Ingest
+          notebook_task:
+            notebook_path: /Workspace/Users/alexchl4178@gmail.com/Proyecto Final/2. Silver
+            base_parameters:
+              catalogo: catalog_alexander
+              esquema: silver
+              container: bronze
+              datalake: adlsalexander26
+            source: WORKSPACE
+          existing_cluster_id: 0215-230749-323msveo
+        - task_key: Load
+          depends_on:
+            - task_key: Transform
+          notebook_task:
+            notebook_path: /Workspace/Users/alexchl4178@gmail.com/Proyecto Final/3. Gold
+            base_parameters:
+              catalogo: catalog_alexander
+              esquema: gold
+              container: silver
+              datalake: adlsalexander26
+            source: WORKSPACE
+          existing_cluster_id: 0215-230749-323msveo
+      queue:
+        enabled: true
